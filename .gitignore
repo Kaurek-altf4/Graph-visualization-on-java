@@ -1,0 +1,12 @@
+/build/
+*.class
+*.log
+*.swp
+*.swo
+*~
+.Session.vim
+Session.vim
+.env
+.idea/
+.vscode/
+.DS_Store

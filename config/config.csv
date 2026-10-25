@@ -1,0 +1,5 @@
+# Это тестовый конфиг
+packageName,com.example.app
+repositoryUrl,https://github.com/example
+mode,url
+maxDepth,5
