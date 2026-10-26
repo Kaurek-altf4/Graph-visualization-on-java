@@ -84,9 +84,23 @@ public class configLoader{
 		config.repositoryUrl = repositoryUrl;
 		config.mode = mode;
 
-		config.maxDepth = Integer.parseInt(maxDepthStr);
+		config.maxDepth = validateDepth(maxDepthStr);
 
 		return config;
 	}
-	
+
+	private int validateDepth(String DepthStr) throws ConfigException{
+		int depth;
+
+		try{
+			depth = Integer.parseInt(DepthStr);
+		}
+		catch(NumberFormatException error){
+			throw new ConfigException("maxDepth должен быть целым числом, получено: " + DepthStr);
+		}
+		if(depth < 1 || depth > 100){
+			throw new ConfigException("depth должно быть либо < 1 || > 100: " + depth);
+		}
+		return depth;
+	}
 }
