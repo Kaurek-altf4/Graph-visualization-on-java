@@ -21,7 +21,7 @@ public class JsonParser{
 
 
       if(dependencies){  
-        if (line.startsWith("}")){
+        if (line.contains("}")){
           dependencies = false;
           break;
         }

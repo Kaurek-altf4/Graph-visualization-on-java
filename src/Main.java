@@ -39,26 +39,40 @@ public class Main{
       
     
 
-   try {
-    DFS dfs = new DFS();
+    try {
+     DFS dfs = new DFS();
     
     
-    TestGraphParser testParser = new TestGraphParser();
-    Map<String, List<String>> testGraph = testParser.loadGraph("../config/test_parser.txt"); 
+      TestGraphParser testParser = new TestGraphParser();
+      Map<String, List<String>> testGraph = testParser.loadGraph("../config/test_parser.txt"); 
     
-    Map<String, List<String>> resultGraph = new HashMap<>();
-    System.out.println("<=== ЗАПУСК В ТЕСТОВОМ РЕЖИМЕ ===>");
-    dfs.dfs(new PackageNode("A", 1), 5, resultGraph, testGraph, true);
+     Map<String, List<String>> resultGraph = new HashMap<>();
+     System.out.println("<=== ЗАПУСК В ТЕСТОВОМ РЕЖИМЕ ===>");
+     dfs.dfs(new PackageNode("A", 1), 5, resultGraph, testGraph, true);
     
     
-    Map<String, List<String>> realGraph = new HashMap<>();
-    System.out.println("\n<=== ЗАПУСК В РЕАЛЬНОМ РЕЖИМЕ (express) ===>");
-    dfs.dfs(new PackageNode("express", 1), 2, realGraph, new HashMap<>(), false);
+     Map<String, List<String>> realGraph = new HashMap<>();
+     System.out.println("\n<=== ЗАПУСК В РЕАЛЬНОМ РЕЖИМЕ (express) ===>");
+     dfs.dfs(new PackageNode("socket.io", 1), 4, realGraph, new HashMap<>(), false);
+     System.out.println("\n@startuml");
+     for (Map.Entry<String, List<String>> entry : realGraph.entrySet()) {
+        String parent = entry.getKey();
+        List<String> children = entry.getValue();
+    
+        for (String child : children) {
+       
+         System.out.println("[" + parent + "] --> [" + child + "]");
+        }
+      }
+      System.out.println("@enduml");
 
-} catch (Exception e) {
-    System.out.println("Ошибка: " + e.getMessage());
-}
 
+    } catch (Exception e) {
+     System.out.println("Ошибка: " + e.getMessage());
+    }
+    
+    
+  
 
 	}
 }
