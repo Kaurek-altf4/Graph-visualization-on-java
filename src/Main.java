@@ -37,26 +37,27 @@ public class Main{
         System.err.println("Ошибка: " + e.getMessage());
     }
       
+    
+
+   try {
+    DFS dfs = new DFS();
+    
+    
     TestGraphParser testParser = new TestGraphParser();
+    Map<String, List<String>> testGraph = testParser.loadGraph("../config/test_parser.txt"); 
+    
+    Map<String, List<String>> resultGraph = new HashMap<>();
+    System.out.println("<=== ЗАПУСК В ТЕСТОВОМ РЕЖИМЕ ===>");
+    dfs.dfs(new PackageNode("A", 1), 5, resultGraph, testGraph, true);
+    
+    
+    Map<String, List<String>> realGraph = new HashMap<>();
+    System.out.println("\n<=== ЗАПУСК В РЕАЛЬНОМ РЕЖИМЕ (express) ===>");
+    dfs.dfs(new PackageNode("express", 1), 2, realGraph, new HashMap<>(), false);
 
-    try {
-    
-        Map<String, List<String>> testGraph = testParser.loadGraph("../config/test_parser.txt");
-    
-        Map<String, List<String>> resultGraph = new HashMap<>();
-        DFS dfs = new DFS();
-  
-        dfs.dfs(new PackageNode("A", 1), 5, resultGraph, testGraph);
-    
-    
-        System.out.println("<=== Результат обхода графа ===>");
-        for (Map.Entry<String, List<String>> entry : resultGraph.entrySet()) {
-            System.out.println(entry.getKey() + " -> " + entry.getValue());
-        } 
-
-      } catch (ConfigException e) {
-          System.out.println("Ошибка: " + e.getMessage());
-      }
+} catch (Exception e) {
+    System.out.println("Ошибка: " + e.getMessage());
+}
 
 
 	}

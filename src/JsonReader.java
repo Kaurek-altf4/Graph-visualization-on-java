@@ -10,7 +10,9 @@ public class JsonReader{
   
  public List<String> fetchFile(String url) throws IOException, InterruptedException, ConfigException{
 
-   HttpClient client = HttpClient.newHttpClient();
+   HttpClient client = HttpClient.newBuilder()
+        .followRedirects(HttpClient.Redirect.ALWAYS)
+        .build();
    HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
